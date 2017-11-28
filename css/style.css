@@ -6,15 +6,11 @@
 COLOR LIST
 --------------------------
 
--Cyberpunk-
-Pink: #F165BA
-Dark Grey: #222222;
-Off-White: #EDFFEC
-Green: #61E786
-
--Plain-
 Red: #D93200
 White: #FFFFFF
+Black: #000000;
+Light Grey: #EDEEEF;
+Dark Grey: #222222;
 
 */
 
@@ -36,7 +32,7 @@ h1 {
 body {
     font-size: 22px;
     font-family: 'Exo', sans-serif;
-    color: #222222;
+    color: #000000;
     text-align: center;
     background-color: #FFFFFF;
 }
@@ -57,23 +53,23 @@ body {
 }
 
 input {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  
-  border-radius: 10%;
-  width: 20px;
-  height: 20px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 
-  border: 2px;
-  border-style: solid;
-  border-color: #999999;
-  transition: 0.2s all linear;
-  outline: none;
-  margin-right: 5px;
+    border-radius: 10%;
+    width: 18px;
+    height: 18px;
 
-  position: relative;
-  top: 2px;
+    border: 2px;
+    border-style: solid;
+    border-color: #999999;
+    transition: 0.2s all linear;
+    outline: none;
+    margin-right: 5px;
+
+    position: relative;
+    top: 2px;
 }
 
 .radio:hover {
@@ -84,7 +80,31 @@ input:checked {
     border: 2px;
     border-style: solid;
     border-color: #D93200;
+    background-color: #D93200;
     color: #D93200;
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+#progressbar {
+    background-color: #EDEEEF;
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    height: 20px;
+    width: 50%;
+    padding: 3px;
+    margin: auto;
+    border-radius: 15px;
+}
+
+#progress {
+    background-color: #D93200;
+    /* changed by JS in index.js */
+    width: 0%;
+    height: 20px;
+    border-radius: 15px;
 }
 
 button {
@@ -93,12 +113,12 @@ button {
     font-size: 20px;
     background-color: #D93200;
     color: #FFFFFF;
-    border: 0px;
+    border: 5px;
     border-radius: 5px;
     padding: 10px;
     cursor: pointer;
-    margin-top: 40px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 300px;
     margin-left: 5px;
     margin-right: 5px;
     width: 100px;
@@ -106,8 +126,12 @@ button {
 }
 
 button:hover {
+    border: 2px;
+    border-style: solid;
+    border-color: #D93200;
+    border-radius: 5px;
     background-color: #FFFFFF;
-    color: #000000;
+    color: #D93200;
 }
 
 button:focus {

@@ -1,4 +1,4 @@
-/* Disobedient Electronics: Undecided Voter Test
+/* Disobedient Electronics: Disruptive Ballot
    ---------------------------------------------
     Designing Digital Play (DDP)
     Author: Vikram Kumar
@@ -6,7 +6,7 @@
 */
 
 /* TODO:
-   1. UPLOAD TO GITHUB!
+  
 */
 
 

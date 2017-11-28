@@ -228,6 +228,7 @@ function onNext() {
   } else {
     // Else show the next slide
     showSlide(currentSlide + 1);
+    progress.style.width = `${(currentSlide)*10}%`;
   }
 }
 
@@ -237,6 +238,7 @@ function onPrevious() {
   // Else show the previous slide
   // pointsContainer.style.display = 'none';
   showSlide(currentSlide - 1);
+  progress.style.width = `${(currentSlide)*10}%`;
 }
 
 // Checks if the current question was left blank
@@ -317,6 +319,7 @@ buildQuiz();
 const previousButton = document.getElementById("previous");
 const nextButton = document.getElementById("next");
 const slides = document.querySelectorAll(".slide");
+const progress = document.getElementById("progress");
 let currentSlide = 0;
 
 // Show the first slide
