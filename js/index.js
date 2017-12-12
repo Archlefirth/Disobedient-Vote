@@ -19,99 +19,90 @@ const myQuestions = [
     question: "The municipality can save money without compromising welfare.",
     answerList: {
       //nested object literal for the party each answer choice leans towards
-      a: ["Agree", 1],
-      b: ["Disagree", 2],
-      c: ["Neutral", 3],
+      a: ["Agree", [1, 2, 3, 4]],
+      b: ["Disagree", [5]],
+      c: ["Neutral", [0]],
     },
   },
 
   {
     question: "Copenhagen needs to invest in more bicycle lanes.",
     answerList: {
-      //nested object literal for the party each answer choice leans towards
-      a: ["Agree", 1],
-      b: ["Disagree", 2],
-      c: ["Neutral", 3],
+      a: ["Agree", [1, 2, 3, 4, 5]],
+      b: ["Disagree", [0]],
+      c: ["Neutral", [0]],
     },
   },
 
   {
     question: "Copenhagen should take on more refugees.",
     answerList: {
-      //nested object literal for the party each answer choice leans towards
-      a: ["Agree", 1],
-      b: ["Disagree", 2],
-      c: ["Neutral", 3],
+      a: ["Agree", [2]],
+      b: ["Disagree", [1, 3, 4, 5]],
+      c: ["Neutral", [0]],
     },
   },
 
   {
     question: "Government institutions give too many considerations to religious minorities.",
     answerList: {
-      //nested object literal for the party each answer choice leans towards
-      a: ["Agree", 1],
-      b: ["Disagree", 2],
-      c: ["Neutral", 3],
+      a: ["Agree", [1, 2, 3, 4]],
+      b: ["Disagree", [5]],
+      c: ["Neutral", [0]],
     },
   },
 
   {
     question: "Libraries and cultural centers take up too much money.",
     answerList: {
-      //nested object literal for the party each answer choice leans towards
-      a: ["Agree", 1],
-      b: ["Disagree", 2],
-      c: ["Neutral", 3],
+      a: ["Agree", [2, 3, 4]],
+      b: ["Disagree", [1, 5]],
+      c: ["Neutral", [0]],
     },
   },
 
   {
     question: "Elderly people should have the option to pay for extra services at thier retirement homes.",
     answerList: {
-      //nested object literal for the party each answer choice leans towards
-      a: ["Agree", 1],
-      b: ["Disagree", 2],
-      c: ["Neutral", 3],
+      a: ["Agree", [1, 2, 3, 4]],
+      b: ["Disagree", [5]],
+      c: ["Neutral", [0]],
     },
   },
 
   {
     question: "Copenhagen can do more to sort waste and recycle.",
     answerList: {
-      //nested object literal for the party each answer choice leans towards
-      a: ["Agree", 1],
-      b: ["Disagree", 2],
-      c: ["Neutral", 3],
+      a: ["Agree", [1, 5]],
+      b: ["Disagree", [3, 4]],
+      c: ["Neutral", [2]],
     },
   },
 
   {
     question: "The municipality should increase demands that unemployed citizens find work.",
     answerList: {
-      //nested object literal for the party each answer choice leans towards
-      a: ["Agree", 1],
-      b: ["Disagree", 2],
-      c: ["Neutral", 3],
+      a: ["Agree", [1, 2, 3, 4, 5]],
+      b: ["Disagree", [0]],
+      c: ["Neutral", [0]],
     },
   },
 
   {
     question: "Only organic food should be served at public food programs.",
     answerList: {
-      //nested object literal for the party each answer choice leans towards
-      a: ["Agree", 1],
-      b: ["Disagree", 2],
-      c: ["Neutral", 3],
+      a: ["Agree", [1, 5]],
+      b: ["Disagree", [2, 3, 4]],
+      c: ["Neutral", [0]],
     },
   },
 
   {
     question: "The municipal tax should be lowered.",
     answerList: {
-      //nested object literal for the party each answer choice leans towards
-      a: ["Agree", 1],
-      b: ["Disagree", 2],
-      c: ["Neutral", 3],
+      a: ["Agree", [2, 3, 4]],
+      b: ["Disagree", [5]],
+      c: ["Neutral", [1]],
     },
   }
 
@@ -167,6 +158,15 @@ function showResults(){
   var blank = false;
   var track = 0;
 
+  // Variables to store the tallies for each candidate
+  var cce = {index: 1, string: "cce", total: 0};
+  var cls = {index: 2, string: "cls", total: 0};;
+  var av = {index: 3, string: "av", total: 0};;
+  var ng = {index: 4, string: "ng", total: 0};;
+  var fj = {index: 5, string: "fj", total: 0};;
+  // User's candidate match
+  var result = 0;
+
   // Iterate through each question...
   myQuestions.forEach( (currentQuestion, questionNumber) => {
     // Find the selected answer
@@ -179,20 +179,49 @@ function showResults(){
       blank = true;
       track = questionNumber + 1; 
     } else {
-      totalPoints = totalPoints + currentQuestion.answerList[userAnswer][1];
+      for(var i = 0; i < currentQuestion.answerList[userAnswer][1].length; i++) {
+        switch(currentQuestion.answerList[userAnswer][1][i]) {
+          case 1:
+            cce.total = cce.total + 1;
+            break;
+          case 2:
+            cls.total = cls.total + 1;
+            break;
+          case 3:
+            av.total = av.total + 1;
+            break;
+          case 4:
+            ng.total = ng.total + 1;
+            break;
+          case 5:
+            fj.total = fj.total + 1;
+            break;
+          default:
+        }
+      }
+
+      // Find the candidate with the highest total
+      var tallyArray = [cce, cls, av, ng, fj];
+      result = tallyArray[0];
+      for (var i = 0; i < tallyArray.length; i++) {
+        if (i + 1 < tallyArray.length) {
+          if (tallyArray[i + 1].total >= result.total) {
+            result = tallyArray[i + 1];
+          }
+        }
+      }
     }
   });
 
-  // demoTest.innerHTML = blank;
 
   // Throw an alert if a question was left blank
   if(blank === true) {
     createCustomAlert(`Answer Question ${track}`);
   } else {
     // Else show the total number of points
-    window.localStorage.setItem("totalPoints", totalPoints);
-    // pointsContainer.innerHTML = totalPoints;
-    // pointsContainer.style.display = 'block';
+    window.localStorage.setItem('result', result.index);
+    // demoTest.innerHTML = result.index;
+    // demoTest.style.display = 'block';
     window.open('results.html', '_parent');
   }
 }
@@ -309,8 +338,8 @@ var ALERT_TITLE = "ERROR";
 var ALERT_BUTTON_TEXT = "OK";
 
 const quizContainer = document.getElementById('quiz');
-// const pointsContainer = document.getElementById('points');
 const submitButton = document.getElementById('submit');
+// For the purpose of debugging
 // const demoTest = document.getElementById("demo");
 
 // Display the quiz right away

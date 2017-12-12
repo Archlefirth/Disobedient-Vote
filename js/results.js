@@ -5,26 +5,18 @@
     Version: 1.0
 */
 
-/* TODO:
-  
-*/
-
 
 // Builds the results page
 //----------------------------------------
 function buildResults() {
-  // Display the points
-  // pointsContainer.innerHTML = `Score: ${total}`;
-  // pointsContainer.style.display = 'block';
-  // pointsContainer.style.fontSize = "xx-large";
-
-  // To randomize the candidate the user matches with
-  //--making the quiz pointless e.g. the commentary of the project
-  var rand = Math.floor(Math.random() * 5) + 1;
-  // rand = 1;
+  // Get the index of the matched candidate from index.html
+  // Convert to int because localStorage "stringifys" everything
+  var index = parseInt(window.localStorage.getItem('result'));
+  // For debugging
+  // var index = 5;
 
   //Display the appropriate candidate
-  switch (rand) {
+  switch (index) {
     case 1:
         nameContainer.innerHTML = "Carl Christian Ebbesen";
         partyContainer.innerHTML = "Dansk Folkeparti (DF)"
@@ -81,7 +73,6 @@ function buildResults() {
  the HTML elements and store references to them
  ------------------------------------- */
 
-var total = window.localStorage.getItem("totalPoints");
 // window.localStorage.removeItem("totalPoints");
 
 const nameContainer = document.getElementById('name');
